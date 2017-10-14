@@ -1,4 +1,9 @@
 <div class="container">
-    <h1>My books</h1>
+  <h1>My books</h1>
 
+  <book-list-cards (onMarkAsReadClicked)="markBookAsRead($event)" [books]="books"></book-list-cards>
+
+  <div class="text-right">
+    <app-pagination></app-pagination>
+  </div>
 </div>

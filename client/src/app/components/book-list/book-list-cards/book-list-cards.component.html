@@ -1,0 +1,16 @@
+<div *ngFor="let bookList of bookGroups" class="row">
+  <div *ngFor="let book of bookList" class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <div class="caption">
+        <h3>{{ book.title }}</h3>
+        <p>By {{ book.author }}</p>
+        <p>{{ book.description }}</p>
+        <p>ISBN: {{ book.isbn }}</p>
+        <p>Printed in {{ book.printYear }}</p>
+        <p>
+          <button (click)="markAsReadClicked(book.id)" type="button" class="btn btn-primary" role="button">Mark as Read</button>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
