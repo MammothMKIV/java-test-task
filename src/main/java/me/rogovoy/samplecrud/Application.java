@@ -1,4 +1,4 @@
-package me.rogovoy;
+package me.rogovoy.samplecrud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

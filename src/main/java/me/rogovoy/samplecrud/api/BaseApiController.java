@@ -1,4 +1,4 @@
-package me.rogovoy.api;
+package me.rogovoy.samplecrud.api;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 

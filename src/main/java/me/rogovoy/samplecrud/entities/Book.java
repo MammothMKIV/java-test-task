@@ -1,4 +1,4 @@
-package me.rogovoy.entities;
+package me.rogovoy.samplecrud.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
