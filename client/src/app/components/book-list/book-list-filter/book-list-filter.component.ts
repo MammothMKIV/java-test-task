@@ -64,7 +64,9 @@ export class BookListFilterComponent implements OnInit {
 
   private readAlready: any = this.readAlreadyOptions[0];
   private sort: any = this.sortOptions[0];
-  private _filterValues: IBookListFilterPanelValues = {};
+  private keywords: string;
+  private yearFrom: string;
+  private yearTo: string;
 
   constructor() { }
 
@@ -72,18 +74,46 @@ export class BookListFilterComponent implements OnInit {
   }
 
   pushFilters() {
-    this.onFiltersChanged.emit(_.cloneDeep(this._filterValues));
+    let filterValues: IBookListFilterPanelValues = {};
+
+    if (this.readAlready.value !== null) {
+      filterValues.readAlready = this.readAlready.value;
+    }
+
+    if (this.sort.value !== null) {
+      filterValues.sort = this.sort.value;
+    }
+
+    if (typeof this.keywords === 'string' && this.keywords.length !== 0) {
+      filterValues.keywords = this.keywords;
+    }
+
+    if (typeof this.yearFrom === 'string' && this.yearFrom.length !== 0) {
+      let parsed = parseInt(this.yearFrom);
+
+      if (!isNaN(parsed)) {
+        filterValues.yearFrom = parsed;
+      }
+    }
+
+    if (typeof this.yearTo === 'string' && this.yearTo.length !== 0) {
+      let parsed = parseInt(this.yearTo);
+
+      if (!isNaN(parsed)) {
+        filterValues.yearTo = parsed;
+      }
+    }
+
+    this.onFiltersChanged.emit(filterValues);
   }
 
   onReadAlreadySelected(value: any) {
-    this._filterValues.readAlready = value.value;
     this.readAlready = value;
 
     this.pushFilters();
   }
 
   onSortSelected(value: any) {
-    this._filterValues.sort = value.value;
     this.sort = value;
 
     this.pushFilters();
@@ -92,8 +122,9 @@ export class BookListFilterComponent implements OnInit {
   resetFilters() {
     this.readAlready = this.readAlreadyOptions[0];
     this.sort = this.sortOptions[0];
-
-    this._filterValues = {};
+    this.keywords = '';
+    this.yearFrom = '';
+    this.yearTo = '';
 
     this.pushFilters();
   }
