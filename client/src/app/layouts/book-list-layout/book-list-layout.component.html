@@ -1,9 +1,22 @@
 <div class="container">
   <h1>My books</h1>
 
-  <book-list-cards (onMarkAsReadClicked)="markBookAsRead($event)" [books]="books"></book-list-cards>
+  <div class="toolbar">
+    <button (click)="showAddBook()" class="btn btn-primary btn-add-book">+ Add Book</button>
+  </div>
+
+  <book-list-cards (onDeleteClicked)="deleteBook($event)"
+                   (onEditClicked)="showEditBook($event)"
+                   (onMarkAsReadClicked)="markBookAsRead($event)"
+                   [books]="books"></book-list-cards>
 
   <div class="text-right">
     <app-pagination></app-pagination>
   </div>
+
+  <edit-book-modal (onModalClose)="onModalClose()"
+                   (onCreateBook)="onCreateBook($event)"
+                   [book]="modalBook"
+                   [mode]="modalMode"
+                   [visible]="modalVisible"></edit-book-modal>
 </div>

@@ -1,0 +1,41 @@
+<div class="modal fade"
+     #modal="bs-modal"
+     bsModal
+     (onHidden)="closeModal()"
+     tabindex="-1"
+     role="dialog">
+  <div class="modal-dialog" role="document">
+    <form *ngIf="book" (submit)="submitForm()" class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">{{ mode === 'create' ? 'Add new Book' : 'Edit book' }}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="editBookTitle">Title</label>
+          <input [(ngModel)]="book.title" name="title" type="text" class="form-control" id="editBookTitle" placeholder="Title" required>
+        </div>
+        <div class="form-group">
+          <label for="editBookDescription">Description</label>
+          <textarea [(ngModel)]="book.description" name="description" class="form-control" id="editBookDescription" placeholder="Description" required></textarea>
+        </div>
+        <div *ngIf="mode === 'create'" class="form-group">
+          <label for="editBookAuthor">Author</label>
+          <input [(ngModel)]="book.author" name="author" type="text" class="form-control" id="editBookAuthor" placeholder="Author" required>
+        </div>
+        <div class="form-group">
+          <label for="editBookIsbn">ISBN</label>
+          <input [(ngModel)]="book.isbn" name="isbn" type="text" class="form-control" id="editBookIsbn" placeholder="ISBN" required>
+        </div>
+        <div class="form-group">
+          <label for="editBookPrintYear">Print Year</label>
+          <input number-only="true" [(ngModel)]="book.printYear" name="printYear" type="text" class="form-control" id="editBookPrintYear" placeholder="Print Year" required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">{{ mode === 'create' ? 'Create' : 'Update' }}</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,48 +1,59 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IBook } from "../../models/book.interface";
+import { BookService } from "../../services/book.service";
+import * as _ from "lodash";
 
 @Component({
   selector: 'book-list-layout',
-  templateUrl: './book-list-layout.component.html'
+  templateUrl: './book-list-layout.component.html',
+  styleUrls: ['./book-list-layout.component.scss']
 })
-export class BookListLayoutComponent {
-  private books: Array<IBook> = [
-    {
-      id: 1,
-      title: 'Book 1',
-      description: 'Description 1',
-      author: 'Author 1',
-      isbn: '4232342342342',
-      printYear: 2005,
-      readAlready: false
-    },{
-      id: 2,
-      title: 'Book 2',
-      description: 'Description 2',
-      author: 'Author 2',
-      isbn: '4232342342342',
-      printYear: 2005,
-      readAlready: false
-    },{
-      id: 3,
-      title: 'Book 1',
-      description: 'Description 3',
-      author: 'Author 3',
-      isbn: '4232342342342',
-      printYear: 2005,
-      readAlready: false
-    },{
-      id: 4,
-      title: 'Book 4',
-      description: 'Description 4',
-      author: 'Author 4',
-      isbn: '4232342342342',
-      printYear: 2005,
-      readAlready: false
-    },
-  ];
+export class BookListLayoutComponent implements OnInit {
+  constructor(
+    private bookService: BookService
+  ) {
 
-  markBookAsRead(id: number) {
-    console.log(id);
+  }
+
+  private books: Array<IBook>;
+
+  private modalBook: IBook;
+  private modalMode: 'create' | 'update';
+  private modalVisible: boolean = false;
+
+  onCreateBook(book: IBook) {
+    console.log(book);
+  }
+
+  markBookAsRead(book: IBook) {
+    console.log(book);
+  }
+
+  showEditBook(book: IBook) {
+    this.modalBook = _.cloneDeep(book);
+    this.modalMode = 'update';
+    this.modalVisible = true;
+  }
+
+  showAddBook() {
+    this.modalBook = this.bookService.getBlankBook();
+    this.modalMode = 'create';
+    this.modalVisible = true;
+  }
+
+  deleteBook(book: IBook) {
+    this.bookService.deleteBook(book);
+  }
+
+  onModalClose() {
+    this.modalVisible = false;
+  }
+
+  ngOnInit(): void {
+    this.bookService.getBooks().then((books: Array<IBook>) => {
+      this.books = books;
+    }).catch((e) => {
+      console.log(e);
+    });
   }
 }

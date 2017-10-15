@@ -7,9 +7,18 @@
         <p>{{ book.description }}</p>
         <p>ISBN: {{ book.isbn }}</p>
         <p>Printed in {{ book.printYear }}</p>
-        <p>
-          <button (click)="markAsReadClicked(book.id)" type="button" class="btn btn-primary" role="button">Mark as Read</button>
-        </p>
+        <div>
+          <button (click)="markAsReadClicked(book)" type="button" class="btn btn-primary" role="button">Mark as Read</button>
+          <div class="btn-group" dropdown container="body">
+            <button dropdownToggle type="button" class="btn btn-default dropdownToggle">
+              Actions <span class="caret"></span>
+            </button>
+            <ul *dropdownMenu class="dropdown-menu" role="menu">
+              <li role="menuitem"><a (click)="editClicked($event, book)" class="dropdown-item" href="">Edit</a></li>
+              <li role="menuitem"><a (click)="deleteClicked($event, book)" class="dropdown-item" href="#">Delete</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
