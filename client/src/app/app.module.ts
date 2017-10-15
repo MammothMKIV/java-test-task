@@ -13,6 +13,7 @@ import { EditBookModalComponent } from './components/edit-book-modal/edit-book-m
 import { BsDropdownModule, ModalModule } from "ngx-bootstrap";
 import { FormsModule } from "@angular/forms";
 import { NumberOnlyDirective } from "./forms/number-only.directive";
+import { BookListCardComponent } from './components/book-list/book-list-card/book-list-card.component';
 
 const appRoutes = [
   {
@@ -39,6 +40,7 @@ const appRoutes = [
     BookListCardsComponent,
     EditBookModalComponent,
     NumberOnlyDirective,
+    BookListCardComponent,
   ],
   imports: [
     HttpClientModule,

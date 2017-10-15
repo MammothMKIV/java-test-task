@@ -51,7 +51,9 @@ export class BookListLayoutComponent implements OnInit {
   }
 
   deleteBook(book: IBook) {
-    this.bookService.deleteBook(book);
+    if (confirm('Are you sure you want to delete ' + book.title + '?')) {
+      this.bookService.deleteBook(book);
+    }
   }
 
   onModalClose() {

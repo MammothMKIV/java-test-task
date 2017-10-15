@@ -34,18 +34,12 @@ export class BookListCardsComponent implements OnInit {
     this.onMarkAsReadClicked.emit(book);
   }
 
-  editClicked($event: Event, book: IBook) {
-    $event.preventDefault();
-
+  editClicked(book: IBook) {
     this.onEditClicked.emit(book);
   }
 
-  deleteClicked($event: Event, book: IBook) {
-    $event.preventDefault();
-
-    if (confirm('Are you sure you want to delete ' + book.title + '?')) {
-      this.onDeleteClicked.emit(book);
-    }
+  deleteClicked(book: IBook) {
+    this.onDeleteClicked.emit(book);
   }
 
   ngOnInit() {

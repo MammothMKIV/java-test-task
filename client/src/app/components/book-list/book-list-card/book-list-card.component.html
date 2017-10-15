@@ -1,0 +1,24 @@
+<div class="col-sm-6 col-md-4">
+  <div class="thumbnail" [ngClass]="{ 'unread': !book.readAlready }">
+    <div class="caption">
+      <h3>{{ book.title }}</h3>
+      <p>By {{ book.author }}</p>
+      <p>{{ book.description }}</p>
+      <p>ISBN: {{ book.isbn }}</p>
+      <p>Printed in {{ book.printYear }}</p>
+      <div>
+        <button *ngIf="!book.readAlready" (click)="markAsReadClicked(book)" type="button" class="btn btn-primary" role="button">Mark as Read</button>
+        <button *ngIf="book.readAlready && undoable" (click)="markAsReadClicked(book)" type="button" class="btn btn-primary" role="button">Undo</button>
+        <div class="btn-group" dropdown container="body">
+          <button dropdownToggle type="button" class="btn btn-default dropdownToggle">
+            Actions <span class="caret"></span>
+          </button>
+          <ul *dropdownMenu class="dropdown-menu" role="menu">
+            <li role="menuitem"><a (click)="editClicked($event, book)" class="dropdown-item" href="">Edit</a></li>
+            <li role="menuitem"><a (click)="deleteClicked($event, book)" class="dropdown-item text-danger" href="#">Delete</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
