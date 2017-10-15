@@ -5,6 +5,8 @@
     <button (click)="showAddBook()" class="btn btn-primary btn-add-book">+ Add Book</button>
   </div>
 
+  <book-list-filter (onFiltersChanged)="onFiltersChanged($event)"></book-list-filter>
+
   <book-list-cards (onDeleteClicked)="deleteBook($event)"
                    (onEditClicked)="showEditBook($event)"
                    (onMarkAsReadClicked)="markBookAsRead($event)"

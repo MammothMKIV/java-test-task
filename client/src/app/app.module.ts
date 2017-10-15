@@ -14,6 +14,9 @@ import { BsDropdownModule, ModalModule } from "ngx-bootstrap";
 import { FormsModule } from "@angular/forms";
 import { NumberOnlyDirective } from "./forms/number-only.directive";
 import { BookListCardComponent } from './components/book-list/book-list-card/book-list-card.component';
+import { BookListFilterComponent } from './components/book-list/book-list-filter/book-list-filter.component';
+import { DropdownSelectComponent } from './components/dropdown-select/dropdown-select.component';
+import { ModelDebounceDirective } from "./forms/model-debounce.directive";
 
 const appRoutes = [
   {
@@ -41,6 +44,9 @@ const appRoutes = [
     EditBookModalComponent,
     NumberOnlyDirective,
     BookListCardComponent,
+    BookListFilterComponent,
+    DropdownSelectComponent,
+    ModelDebounceDirective,
   ],
   imports: [
     HttpClientModule,
@@ -48,10 +54,10 @@ const appRoutes = [
     BsDropdownModule.forRoot(),
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing : true }
+      { enableTracing : false }
     ),
     BrowserModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     BookService

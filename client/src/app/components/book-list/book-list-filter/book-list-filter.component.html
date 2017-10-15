@@ -1,0 +1,32 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <form class="form-inline">
+      <div class="form-group">
+        <input [(ngModel)]="_filterValues.keywords" modelDebounce [delay]="700" (onDebounce)="pushFilters()" name="keywords" type="text" class="form-control" placeholder="Keywords">
+      </div>
+      <div class="form-group">
+        <input [(ngModel)]="_filterValues.yearFrom" modelDebounce [delay]="700" (onDebounce)="pushFilters()" name="yearFrom" type="text" class="form-control" placeholder="Year From">
+      </div>
+      <div class="form-group">
+        <input [(ngModel)]="_filterValues.yearTo" modelDebounce [delay]="700" (onDebounce)="pushFilters()" name="yearTo" type="text" class="form-control" placeholder="Year To">
+      </div>
+      <div class="form-group">
+        <dropdown-select [options]="readAlreadyOptions"
+                         (onItemSelected)="onReadAlreadySelected($event)"
+                         [placeholderItem]="readAlreadyOptions[0]"
+                         [value]="readAlready"
+                         [captionKey]="'caption'"
+                         [fieldTitle]="'Read Status'"></dropdown-select>
+      </div>
+      <div class="form-group">
+        <dropdown-select [options]="sortOptions"
+                         (onItemSelected)="onSortSelected($event)"
+                         [placeholderItem]="sortOptions[0]"
+                         [value]="sort"
+                         [captionKey]="'caption'"
+                         [fieldTitle]="'Sort'"></dropdown-select>
+      </div>
+      <button (click)="resetFilters()" class="btn btn-default">Reset Filters</button>
+    </form>
+  </div>
+</div>

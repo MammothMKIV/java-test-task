@@ -3,6 +3,7 @@ import { IBook } from "../../models/book.interface";
 import { BookService } from "../../services/book.service";
 import * as _ from "lodash";
 import { IApiSearchResults } from "../../models/book-search-results.interface";
+import { IBookListFilterPanelValues } from "../../models/book-list-filter-panel-values.interface";
 
 @Component({
   selector: 'book-list-layout',
@@ -58,6 +59,10 @@ export class BookListLayoutComponent implements OnInit {
 
   onModalClose() {
     this.modalVisible = false;
+  }
+
+  onFiltersChanged(filters: IBookListFilterPanelValues) {
+    console.log(filters);
   }
 
   loadBooks() {

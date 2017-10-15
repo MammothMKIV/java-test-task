@@ -1,0 +1,10 @@
+<div class="btn-group" dropdown container="body">
+  <button dropdownToggle type="button" class="btn btn-default dropdownToggle">
+    {{ currentValue == placeholderItem ? fieldTitle : fieldTitle + ': ' + currentValue[captionKey] }} <span class="caret"></span>
+  </button>
+  <ul *dropdownMenu class="dropdown-menu" role="menu">
+    <li *ngFor="let option of _options" role="menuitem">
+      <a (click)="optionSelected($event, option)" class="dropdown-item" href="">{{ option[captionKey] }}</a>
+    </li>
+  </ul>
+</div>
