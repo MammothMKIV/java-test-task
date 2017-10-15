@@ -3,6 +3,6 @@ export interface IBookQuery {
   readAlready?: boolean,
   yearFrom?: number,
   yearTo?: number,
-  page?: number,
-  perPage?: number
+  page: number,
+  perPage: number
 }

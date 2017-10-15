@@ -10,7 +10,7 @@ import { BookListCardsComponent } from "./components/book-list/book-list-cards/b
 import { BookService } from "./services/book.service";
 import { HttpClientModule } from "@angular/common/http";
 import { EditBookModalComponent } from './components/edit-book-modal/edit-book-modal.component';
-import {BsDropdownModule, ModalModule} from "ngx-bootstrap";
+import { BsDropdownModule, ModalModule } from "ngx-bootstrap";
 import { FormsModule } from "@angular/forms";
 import { NumberOnlyDirective } from "./forms/number-only.directive";
 

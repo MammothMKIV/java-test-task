@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IBook } from "../../../models/book.interface";
 
 @Component({
@@ -20,6 +20,8 @@ export class BookListCardsComponent implements OnInit {
     if (!Array.isArray(books)) {
       return;
     }
+
+    this.bookGroups = [];
 
     let chunkSize = 3;
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IBook } from "../../models/book.interface";
 import { BookService } from "../../services/book.service";
 import * as _ from "lodash";
+import { IApiSearchResults } from "../../models/book-search-results.interface";
 
 @Component({
   selector: 'book-list-layout',
@@ -22,18 +23,19 @@ export class BookListLayoutComponent implements OnInit {
   private modalVisible: boolean = false;
   private booksTotal: number = 25;
   private currentPage: number = 1;
-  private booksPerPage: number = 10;
+  private booksPerPage: number = 5;
 
   onPageSelected(page: number) {
     this.currentPage = page;
+    this.loadBooks();
   }
 
   onCreateBook(book: IBook) {
-    console.log(book);
+    this.loadBooks();
   }
 
   markBookAsRead(book: IBook) {
-    console.log(book);
+    this.bookService.toggleRead(book);
   }
 
   showEditBook(book: IBook) {
@@ -56,11 +58,19 @@ export class BookListLayoutComponent implements OnInit {
     this.modalVisible = false;
   }
 
-  ngOnInit(): void {
-    this.bookService.getBooks().then((books: Array<IBook>) => {
-      this.books = books;
+  loadBooks() {
+    this.bookService.getBooks({
+      page: this.currentPage,
+      perPage: this.booksPerPage
+    }).then((result: IApiSearchResults<IBook>) => {
+      this.books = result.entries;
+      this.booksTotal = result.totalCount;
     }).catch((e) => {
       console.log(e);
     });
+  }
+
+  ngOnInit(): void {
+    this.loadBooks();
   }
 }
