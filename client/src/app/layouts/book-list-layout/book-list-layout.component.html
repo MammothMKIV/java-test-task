@@ -11,7 +11,10 @@
                    [books]="books"></book-list-cards>
 
   <div class="text-right">
-    <app-pagination></app-pagination>
+    <app-pagination [currentPage]="currentPage"
+                    [itemsPerPage]="booksPerPage"
+                    [totalItems]="booksTotal"
+                    (onPageSelected)="onPageSelected($event)"></app-pagination>
   </div>
 
   <edit-book-modal (onModalClose)="onModalClose()"

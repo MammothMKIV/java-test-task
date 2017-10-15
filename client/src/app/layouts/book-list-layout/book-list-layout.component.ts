@@ -20,6 +20,13 @@ export class BookListLayoutComponent implements OnInit {
   private modalBook: IBook;
   private modalMode: 'create' | 'update';
   private modalVisible: boolean = false;
+  private booksTotal: number = 25;
+  private currentPage: number = 1;
+  private booksPerPage: number = 10;
+
+  onPageSelected(page: number) {
+    this.currentPage = page;
+  }
 
   onCreateBook(book: IBook) {
     console.log(book);
