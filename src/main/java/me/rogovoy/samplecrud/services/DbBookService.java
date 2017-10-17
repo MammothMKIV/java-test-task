@@ -2,6 +2,7 @@ package me.rogovoy.samplecrud.services;
 
 import me.rogovoy.samplecrud.entities.Book;
 import me.rogovoy.samplecrud.repositories.BookRepository;
+import me.rogovoy.samplecrud.repositories.BookSpecifications;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,8 @@ public class DbBookService implements BookService {
     }
 
     @Override
-    public Iterable<Book> getBooks(Integer page, Integer perPage) {
-        return bookRepository.findAll(new PageRequest(page, perPage)).getContent();
+    public Iterable<Book> getBooks(BookQuery query) {
+        return bookRepository.findAll(BookSpecifications.getSearchQuery(query), new PageRequest(query.getPage(), query.getPerPage())).getContent();
     }
 
     @Override

@@ -3,6 +3,7 @@ package me.rogovoy.samplecrud.api;
 import me.rogovoy.samplecrud.dto.CreateBookDto;
 import me.rogovoy.samplecrud.dto.UpdateBookDto;
 import me.rogovoy.samplecrud.entities.Book;
+import me.rogovoy.samplecrud.services.BookQuery;
 import me.rogovoy.samplecrud.services.BookService;
 import me.rogovoy.samplecrud.validation.ValidationErrorBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +27,26 @@ public class BookController extends BaseApiController {
     @RequestMapping(value = "/books", method = RequestMethod.GET)
     public Iterable<Book> index(
         @RequestParam(value = "page", defaultValue = "0", required = false) Integer page,
-        @RequestParam(value = "perPage", defaultValue = "20", required = false) Integer perPage
+        @RequestParam(value = "perPage", defaultValue = "20", required = false) Integer perPage,
+        @RequestParam(value = "keywords", required = false) String keywords,
+        @RequestParam(value = "yearFrom", required = false) Long yearFrom,
+        @RequestParam(value = "yearTo", required = false) Long yearTo,
+        @RequestParam(value = "readAlready", required = false) Boolean readAlready
     ) {
         if (perPage > 100) {
             perPage = 100;
         }
 
-        return bookService.getBooks(page, perPage);
+        BookQuery query = new BookQuery();
+
+        query.setPage(page);
+        query.setPerPage(perPage);
+        query.setKeywords(keywords);
+        query.setYearFrom(yearFrom);
+        query.setYearTo(yearTo);
+        query.setReadAlready(readAlready);
+
+        return bookService.getBooks(query);
     }
 
     @RequestMapping(value = "/books/{id}", method = RequestMethod.GET)

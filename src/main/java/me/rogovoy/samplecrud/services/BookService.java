@@ -5,7 +5,7 @@ import me.rogovoy.samplecrud.entities.Book;
 import java.util.Optional;
 
 public interface BookService {
-    public Iterable<Book> getBooks(Integer page, Integer perPage);
+    public Iterable<Book> getBooks(BookQuery query);
 
     public Optional<Book> getBook(Long id);
 
