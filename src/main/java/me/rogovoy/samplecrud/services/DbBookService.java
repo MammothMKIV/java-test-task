@@ -4,6 +4,7 @@ import me.rogovoy.samplecrud.entities.Book;
 import me.rogovoy.samplecrud.repositories.BookRepository;
 import me.rogovoy.samplecrud.repositories.BookSpecifications;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class DbBookService implements BookService {
     }
 
     @Override
-    public Iterable<Book> getBooks(BookQuery query) {
+    public ApiSearchResults<Book> getBooks(BookQuery query) {
         Sort.Direction direction = Sort.Direction.DESC;
         BookQuerySort field = BookQuerySort.ID;
 
@@ -48,7 +49,9 @@ public class DbBookService implements BookService {
 
         PageRequest pageRequest = new PageRequest(query.getPage(), query.getPerPage(), sort);
 
-        return bookRepository.findAll(BookSpecifications.getSearchQuery(query), pageRequest).getContent();
+        Page<Book> results = bookRepository.findAll(BookSpecifications.getSearchQuery(query), pageRequest);
+
+        return new ApiSearchResults<>(results.getTotalElements(), results.getContent());
     }
 
     @Override
