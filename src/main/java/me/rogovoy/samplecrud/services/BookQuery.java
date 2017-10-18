@@ -2,11 +2,20 @@ package me.rogovoy.samplecrud.services;
 
 public class BookQuery {
     private String keywords;
+
     private Long yearFrom;
+
     private Long yearTo;
+
     private Boolean readAlready;
+
     private Integer page;
+
     private Integer perPage;
+
+    private BookQuerySort orderBy;
+
+    private String order;
 
     public String getKeywords() {
         return keywords;
@@ -54,5 +63,21 @@ public class BookQuery {
 
     public void setPerPage(Integer perPage) {
         this.perPage = perPage;
+    }
+
+    public BookQuerySort getOrderBy() {
+        return orderBy;
+    }
+
+    public void setOrderBy(BookQuerySort orderBy) {
+        this.orderBy = orderBy;
+    }
+
+    public String getOrder() {
+        return order;
+    }
+
+    public void setOrder(String order) {
+        this.order = order;
     }
 }

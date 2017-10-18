@@ -5,6 +5,7 @@ import me.rogovoy.samplecrud.repositories.BookRepository;
 import me.rogovoy.samplecrud.repositories.BookSpecifications;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -20,7 +21,34 @@ public class DbBookService implements BookService {
 
     @Override
     public Iterable<Book> getBooks(BookQuery query) {
-        return bookRepository.findAll(BookSpecifications.getSearchQuery(query), new PageRequest(query.getPage(), query.getPerPage())).getContent();
+        Sort.Direction direction = Sort.Direction.DESC;
+        BookQuerySort field = BookQuerySort.ID;
+
+        if (query.getOrder() != null) {
+            try {
+                direction = Sort.Direction.fromString(query.getOrder());
+            } catch (IllegalArgumentException e) {
+
+            }
+        }
+
+        if (query.getOrderBy() != null) {
+            field = query.getOrderBy();
+        }
+
+        if (query.getPage() == null) {
+            query.setPage(0);
+        }
+
+        if (query.getPerPage() == null) {
+            query.setPerPage(10);
+        }
+
+        Sort sort = new Sort(new Sort.Order(direction, field.toString()));
+
+        PageRequest pageRequest = new PageRequest(query.getPage(), query.getPerPage(), sort);
+
+        return bookRepository.findAll(BookSpecifications.getSearchQuery(query), pageRequest).getContent();
     }
 
     @Override
