@@ -20,7 +20,8 @@
   </div>
 
   <edit-book-modal (onModalClose)="onModalClose()"
-                   (onCreateBook)="onCreateBook($event)"
+                   (onCreateBook)="onBooksChanged($event)"
+                   (onUpdateBook)="onBooksChanged($event)"
                    [book]="modalBook"
                    [mode]="modalMode"
                    [visible]="modalVisible"></edit-book-modal>

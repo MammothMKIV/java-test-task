@@ -35,7 +35,9 @@ export class EditBookModalComponent implements OnInit {
   }
 
   submitForm() {
-    this.bookService.saveBook(this.book).then((book: IBook) => {
+    this.validationErrors = {};
+
+    this.bookService.saveBook(this.book).subscribe((book: IBook) => {
       if (this.mode === 'create') {
         this.onCreateBook.emit(book);
       } else {
@@ -43,8 +45,8 @@ export class EditBookModalComponent implements OnInit {
       }
 
       this.modal.hide();
-    }).catch((e) => {
-      console.log(e);
+    }, (e) => {
+      this.validationErrors = JSON.parse(e.error);
     });
   }
 

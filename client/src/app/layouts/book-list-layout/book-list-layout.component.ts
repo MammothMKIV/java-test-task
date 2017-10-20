@@ -33,7 +33,7 @@ export class BookListLayoutComponent implements OnInit {
     this.loadBooks();
   }
 
-  onCreateBook(book: IBook) {
+  onBooksChanged(book: IBook) {
     this.loadBooks();
   }
 
@@ -55,7 +55,9 @@ export class BookListLayoutComponent implements OnInit {
 
   deleteBook(book: IBook) {
     if (confirm('Are you sure you want to delete ' + book.title + '?')) {
-      this.bookService.deleteBook(book);
+      this.bookService.deleteBook(book).subscribe(() => {
+        this.loadBooks();
+      });
     }
   }
 
