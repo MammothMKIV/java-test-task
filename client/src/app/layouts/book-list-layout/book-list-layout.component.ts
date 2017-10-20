@@ -25,7 +25,7 @@ export class BookListLayoutComponent implements OnInit {
   private modalVisible: boolean = false;
   private booksTotal: number = 25;
   private currentPage: number = 1;
-  private booksPerPage: number = 5;
+  private booksPerPage: number = 10;
   private filters: IBookListFilterPanelValues;
 
   onPageSelected(page: number) {

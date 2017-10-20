@@ -6,7 +6,7 @@
       <p>{{ book.description }}</p>
       <p>ISBN: {{ book.isbn }}</p>
       <p>Printed in {{ book.printYear }}</p>
-      <div>
+      <div class="card-actions">
         <button *ngIf="!book.readAlready" (click)="markAsReadClicked(book)" type="button" class="btn btn-primary" role="button">Mark as Read</button>
         <button *ngIf="book.readAlready && undoable" (click)="markAsReadClicked(book)" type="button" class="btn btn-primary" role="button">Undo</button>
         <div class="btn-group" dropdown container="body">
