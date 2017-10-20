@@ -221,7 +221,15 @@ export class BookService {
     return Promise.resolve();
   }
 
-  toggleRead(book: IBook) {
+  public toggleRead(book: IBook) {
+    let previousValue = book.readAlready;
+
     book.readAlready = !book.readAlready;
+
+    this.http.post('http://localhost:8080/CRUDRogovoy/api/books/' + book.id + '/toggleRead', null).subscribe(() => {
+
+    }, () => {
+      book.readAlready = previousValue;
+    });
   }
 }

@@ -99,6 +99,22 @@ public class BookController extends BaseApiController {
         }
 
         bookService.deleteBook(id);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(value = "/books/{id}/toggleRead", method = RequestMethod.POST)
+    public ResponseEntity toggleBookRead(@PathVariable("id") Long id) {
+        Optional<Book> bookOptional = bookService.getBook(id);
+
+        if (!bookOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("NOT_FOUND", "No book found with the ID specified"));
+        }
+
+        bookOptional.get().setReadAlready(!bookOptional.get().isReadAlready());
+
+        bookService.updateBook(bookOptional.get());
+
         return ResponseEntity.noContent().build();
     }
 }
