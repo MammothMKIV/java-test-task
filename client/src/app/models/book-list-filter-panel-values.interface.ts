@@ -1,7 +1,9 @@
+import { ISort } from "./sort.interface";
+
 export interface IBookListFilterPanelValues {
   readAlready?: boolean,
   yearFrom?: number,
   yearTo?: number,
-  sort?: object,
+  sort?: ISort,
   keywords?: string
 }

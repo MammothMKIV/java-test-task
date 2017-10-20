@@ -36,28 +36,28 @@ export class BookListFilterComponent implements OnInit {
       caption: 'Status: Read first',
       value: {
         field: 'readAlready',
-        sort: 1
+        direction: 'desc'
       }
     },
     {
       caption: 'Status: Unread first',
       value: {
         field: 'readAlready',
-        sort: -1
+        direction: 'asc'
       }
     },
     {
       caption: 'Year: Older first',
       value: {
         field: 'printYear',
-        sort: 1
+        direction: 'asc'
       }
     },
     {
       caption: 'Year: Newer first',
       value: {
         field: 'printYear',
-        sort: -1
+        direction: 'desc'
       }
     },
   ];

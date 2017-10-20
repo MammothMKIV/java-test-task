@@ -4,5 +4,7 @@ export interface IBookQuery {
   yearFrom?: number,
   yearTo?: number,
   page: number,
-  perPage: number
+  perPage: number,
+  orderBy?: string,
+  order?: string
 }

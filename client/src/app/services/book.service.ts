@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { IBook } from "../models/book.interface";
-import { HttpClient } from "@angular/common/http";
-import { IApiSearchResults } from "../models/book-search-results.interface";
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { IApiSearchResults } from "../models/api-search-results.interface";
 import { IBookQuery } from "../models/book-query.interface";
+import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class BookService {
@@ -164,12 +165,38 @@ export class BookService {
     }
   }
 
-  public getBooks(query: IBookQuery): Promise<IApiSearchResults<IBook>> {
-    let offset = (query.page - 1) * query.perPage;
+  public getBooks(query: IBookQuery): Observable<IApiSearchResults<IBook>> {
+    let params = new HttpParams();
 
-    return Promise.resolve({
-      totalCount: this.books.length,
-      entries: this.books.slice(offset, offset + query.perPage)
+    if (typeof query.keywords !== 'undefined') {
+      params = params.append('keywords', query.keywords);
+    }
+
+    if (typeof query.yearFrom !== 'undefined') {
+      params = params.append('yearFrom', query.yearFrom.toString());
+    }
+
+    if (typeof query.yearTo !== 'undefined') {
+      params = params.append('yearTo', query.yearFrom.toString());
+    }
+
+    if (typeof query.readAlready !== 'undefined') {
+      params = params.append('readAlready', query.readAlready ? '1' : '0');
+    }
+
+    params = params.append('page', query.page.toString());
+    params = params.append('perPage', query.perPage.toString());
+
+    if (typeof query.orderBy !== 'undefined') {
+      params = params.append('orderBy', query.orderBy);
+    }
+
+    if (typeof query.order !== 'undefined') {
+      params = params.append('order', query.order);
+    }
+
+    return this.http.get('http://localhost:8080/CRUDRogovoy/api/books', {
+      params: params
     });
   }
 
